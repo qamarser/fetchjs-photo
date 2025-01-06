@@ -3,6 +3,9 @@
     --even-color: #e2e2e2 ;
     --button-color: #f2f2f2;
     --thead-color:  #f2f2f2;
+    --form-back-color: #f2f2f2;
+    --overlay-color:rgba(0, 0, 0, 0.5);
+
 }
 
 .darkmode{
@@ -11,6 +14,8 @@
     --even-color: #585454;
     --button-color: #2f2f2f;
     --thead-color: #424141;
+    --form-back-color: #000000;
+    --overlay-color:rgba(228, 225, 225, 0.5);
 }
 .remove_border{
     border: none;
@@ -108,4 +113,55 @@ thead {
 
 tr:nth-child(even){
     background-color: var(--even-color);
+}
+
+#add_data{
+    position: fixed;
+    cursor: pointer;
+
+}
+/* messsage box */
+
+#add-data-form {
+    background-color: var(--form-back-color);
+    width: 46%; 
+    height: 100%; 
+    position: relative;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -154%);
+    z-index: 1000; 
+    display: none;  
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--overlay-color);
+    z-index: 999;
+    display: none; 
+}
+
+#add-data-form form {
+    width: 300px; 
+    height: 350px; 
+    padding: 20px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+#add-data-form label {
+    margin-left: 6px;
+}
+#add-data-form label input {
+    width: 92%; 
+    margin-bottom: 10px; 
+    padding: 3px;
+    margin: 5px;
+}
+
+#submit-data{
+text-align: center;
 }

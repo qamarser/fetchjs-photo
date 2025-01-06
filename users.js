@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function performSearch(query) {
       console.log("Searching for:", query); 
-      
+
       //Filter the table rows based on the query
       const tableBody = document.getElementById('data-output');
       const rows = tableBody.getElementsByTagName('tr');
@@ -74,3 +74,75 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   }
 });
+
+const addDataButton = document.querySelector('.add_data');
+const addDataForm = document.getElementById('add-data-form');
+const overlay = document.getElementById('overlay');
+
+addDataButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    if (addDataForm.style.display === 'none' || addDataForm.style.display === '') {
+        addDataForm.style.display = 'block';
+        overlay.style.display = 'block';
+    } else {
+        addDataForm.style.display = 'none';
+        overlay.style.display = 'none';
+    }
+});
+
+overlay.addEventListener('click', function () {
+    addDataForm.style.display = 'none';
+    overlay.style.display = 'none';
+});
+
+//add data 
+
+document.addEventListener('DOMContentLoaded', () => {
+  const tableBody = document.getElementById('data-output');
+
+  addDataForm.addEventListener('submit',function(event){
+    event.preventDefault(); 
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const company = document.getElementById('company').value;
+
+    const newUser  = {
+      name: name,
+      email: email,
+      phone: phone,
+      company: {
+          name: company
+      }
+  };
+
+  fetch('https://jsonplaceholder.typicode.com/users',{
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newUser)
+  })
+  .then(response => response.json())
+  .then(data => {
+      // Add the new user to the table
+      const newRow = document.createElement('tr');
+      newRow.innerHTML = `
+          <td>${data.name}</td>
+          <td>${data.email}</td>
+          <td>${data.phone}</td>
+          <td>${data.company.name}</td>
+      `;
+      tableBody.appendChild(newRow);
+
+      addDataForm.style.display = 'none';
+      overlay.style.display = 'none';
+
+      addDataForm.reset();
+  }).catch(error => {
+    console.error('Error:', error);
+    });
+  });
+});
+
+
+//delete row

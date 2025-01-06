@@ -13,7 +13,9 @@ fetch('https://jsonplaceholder.typicode.com/users')
       <td> ${user.email} </td>
       <td> ${user.phone} </td>
       <td> ${user.company.name} </td>
-     
+       <td><button class="remove_border delete-btn"> 
+       <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M200-440v-80h560v80H200Z"/></svg>
+       </button></td>
      </tr>
 
    `  ; 
@@ -151,36 +153,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 //delete row
+
 tableBody.addEventListener('click', function (event) {
-  if (event.target.classList.contains('delete-btn')) {
-      // Confirm deletion (optional)
-      const confirmDelete = confirm('Are you sure you want to delete this row?');
-      if (confirmDelete) {
-          // Remove the row from the table
-          const row = event.target.closest('tr');
-          if (row) {
-          row.remove();}
-
-          // send a DELETE request to the API to remove the data from the server
-          const userId = row.dataset.userId; 
-          if (userId) {
-              fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
-                  method: 'DELETE'
-              })
-              .then(response => {
-                  if (response.ok) {
-                      console.log('User  deleted successfully');
-                  } else {
-                      console.error('Failed to delete user');
-                  }
-              })
-              .catch(error => {
-                  console.error('Error:', error);
-              })} else {
-                row.remove(); // Remove the row if no user ID is present
+    if (event.target.closest('.delete-btn')) {
+        // Confirm deletion
+        const confirmDelete = confirm('Are you sure you want to delete this row?');
+        if (confirmDelete) {
+            const row = event.target.closest('tr');
+            if (row) {
+                row.remove();
             }
-          }
-      }
-  });
 
-  
+            // Send a DELETE request to the API to remove the data from the server
+            const userId = row.dataset.userId; 
+            if (userId) {
+                fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
+                    method: 'DELETE'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('User  deleted successfully');
+                    } else {
+                        console.error('Failed to delete user');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            } else {
+                row.remove(); 
+            }
+        }
+    }
+})

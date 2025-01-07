@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo list</title>
+    <link rel="stylesheet" href="todo.css">
+</head>
+<body>
+    <a href="../index.html" class="back-button">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+            <path d="M480-160 160-480l320-320 57 57-223 223h526v80H314l223 223-57 57Z"/>
+        </svg>
+    </a>
+    <h1>Todo App</h1>
+    <div class="wrapper">
+        <form>
+            <input id="todo-input" type="text" 
+            placeholder="write anything and hit enter to add" autocomplete="off">
+            <button id="add-button">ADD</button>
+        </form>
+        <ul id="todo-list">
+        </ul>
+    </div>
+    <script src="todo.js"></script>
+</body>
+</html>

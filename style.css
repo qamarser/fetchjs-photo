@@ -167,3 +167,11 @@ text-align: center;
 }
 
 
+.todo-link{
+    position: absolute;
+    right: 0%;
+   top: 5%;
+}
+.todo-link svg :hover{
+fill: red;
+}

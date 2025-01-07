@@ -186,3 +186,4 @@ tableBody.addEventListener('click', function (event) {
         }
     }
 })
+
